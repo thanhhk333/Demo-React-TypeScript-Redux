@@ -1,4 +1,4 @@
-export interface Tutorial {
+export interface Student {
     id: string;
     name: string;
     age: number;
@@ -6,57 +6,57 @@ export interface Tutorial {
 }
 
 export interface AppState {
-    tutorials: Tutorial[];
+    students: Student[];
     error: string | null;
-    addTutorialError: string | null;
+    addStudentError: string | null;
 }
 
-export interface FetchTutorialsSuccessAction {
-    type: "FETCH_TUTORIALS_SUCCESS";
-    payload: Tutorial[];
+export interface FetchStudentsSuccessAction {
+    type: "FETCH_STUDENTS_SUCCESS";
+    payload: Student[];
 }
 
-export interface FetchTutorialsFailureAction {
-    type: "FETCH_TUTORIALS_FAILURE";
+export interface FetchStudentsFailureAction {
+    type: "FETCH_STUDENTS_FAILURE";
     payload: string;
 }
 
-export interface AddTutorialSuccessAction {
-    type: "ADD_TUTORIAL_SUCCESS";
-    payload: Tutorial;
+export interface AddStudentSuccessAction {
+    type: "ADD_STUDENT_SUCCESS";
+    payload: Student;
 }
 
-export interface AddTutorialFailureAction {
-    type: "ADD_TUTORIAL_FAILURE";
+export interface AddStudentFailureAction {
+    type: "ADD_STUDENT_FAILURE";
     payload: string;
 }
 
-export interface DeleteTutorialSuccessAction {
-    type: "DELETE_TUTORIAL_SUCCESS";
+export interface DeleteStudentSuccessAction {
+    type: "DELETE_STUDENT_SUCCESS";
     payload: string;
 }
 
-export interface DeleteTutorialFailureAction {
-    type: "DELETE_TUTORIAL_FAILURE";
+export interface DeleteStudentFailureAction {
+    type: "DELETE_STUDENT_FAILURE";
     payload: string;
 }
 
-export interface UpdateTutorialSuccessAction {
-    type: "UPDATE_TUTORIAL_SUCCESS";
-    payload: Tutorial;
+export interface UpdateStudentSuccessAction {
+    type: "UPDATE_STUDENT_SUCCESS";
+    payload: Student;
 }
 
-export interface UpdateTutorialFailureAction {
-    type: "UPDATE_TUTORIAL_FAILURE";
+export interface UpdateStudentFailureAction {
+    type: "UPDATE_STUDENT_FAILURE";
     payload: string;
 }
 
 export type AppAction =
-    | FetchTutorialsSuccessAction
-    | FetchTutorialsFailureAction
-    | AddTutorialSuccessAction
-    | AddTutorialFailureAction
-    | DeleteTutorialSuccessAction
-    | DeleteTutorialFailureAction
-    | UpdateTutorialSuccessAction
-    | UpdateTutorialFailureAction;
+    | FetchStudentsSuccessAction
+    | FetchStudentsFailureAction
+    | AddStudentSuccessAction
+    | AddStudentFailureAction
+    | DeleteStudentSuccessAction
+    | DeleteStudentFailureAction
+    | UpdateStudentSuccessAction
+    | UpdateStudentFailureAction;

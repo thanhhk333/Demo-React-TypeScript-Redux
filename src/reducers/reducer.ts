@@ -1,59 +1,57 @@
 import { AppAction, AppState } from "./types";
 
 const initialState: AppState = {
-    tutorials: [],
+    students: [],
     error: null,
-    addTutorialError: null,
+    addStudentError: null,
 };
 
 export const reducer = (state = initialState, action: AppAction): AppState => {
     switch (action.type) {
-        case "FETCH_TUTORIALS_SUCCESS":
+        case "FETCH_STUDENTS_SUCCESS":
             return {
                 ...state,
-                tutorials: action.payload,
+                students: action.payload,
                 error: null,
             };
-        case "FETCH_TUTORIALS_FAILURE":
+        case "FETCH_STUDENTS_FAILURE":
             return {
                 ...state,
                 error: action.payload,
             };
-        case "ADD_TUTORIAL_SUCCESS":
+        case "ADD_STUDENT_SUCCESS":
             return {
                 ...state,
-                tutorials: [...state.tutorials, action.payload],
+                students: [...state.students, action.payload],
                 error: null,
             };
-        case "ADD_TUTORIAL_FAILURE":
+        case "ADD_STUDENT_FAILURE":
             return {
                 ...state,
                 error: action.payload,
             };
-        case "DELETE_TUTORIAL_SUCCESS":
+        case "DELETE_STUDENT_SUCCESS":
             return {
                 ...state,
-                tutorials: state.tutorials.filter(
-                    (tutorial) => tutorial.id !== action.payload
+                students: state.students.filter(
+                    (student) => student.id !== action.payload
                 ),
                 error: null,
             };
-        case "DELETE_TUTORIAL_FAILURE":
+        case "DELETE_STUDENT_FAILURE":
             return {
                 ...state,
                 error: action.payload,
             };
-        case "UPDATE_TUTORIAL_SUCCESS":
+        case "UPDATE_STUDENT_SUCCESS":
             return {
                 ...state,
-                tutorials: state.tutorials.map((tutorial) =>
-                    tutorial.id === action.payload.id
-                        ? action.payload
-                        : tutorial
+                students: state.students.map((student) =>
+                    student.id === action.payload.id ? action.payload : student
                 ),
                 error: null,
             };
-        case "UPDATE_TUTORIAL_FAILURE":
+        case "UPDATE_STUDENT_FAILURE":
             return {
                 ...state,
                 error: action.payload,

@@ -1,44 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    fetchTutorials,
-    deleteTutorial,
-    updateTutorial,
+    fetchStudents,
+    deleteStudent,
+    updateStudent,
 } from "../reducers/actions";
-import { AppState, Tutorial } from "../reducers/types";
+import { AppState, Student } from "../reducers/types";
 
 const List = () => {
     const dispatch = useDispatch();
-    const tutorials = useSelector((state: AppState) => state.tutorials);
+    const students = useSelector((state: AppState) => state.students);
     const [editId, setEditId] = useState<string>("");
     const [editName, setEditName] = useState<string>("");
     const [editAge, setEditAge] = useState<number>(0);
     const [editBio, setEditBio] = useState<string>("");
 
     useEffect(() => {
-        dispatch(fetchTutorials() as any);
+        dispatch(fetchStudents() as any);
     }, [dispatch]);
 
     const handleDelete = (id: string) => {
-        dispatch(deleteTutorial(id) as any);
+        dispatch(deleteStudent(id) as any);
     };
 
-    const handleEdit = (tutorial: Tutorial) => {
-        setEditId(tutorial.id);
-        setEditName(tutorial.name);
-        setEditAge(tutorial.age);
-        setEditBio(tutorial.bio);
+    const handleEdit = (student: Student) => {
+        setEditId(student.id);
+        setEditName(student.name);
+        setEditAge(student.age);
+        setEditBio(student.bio);
     };
 
     const handleUpdate = () => {
-        const updatedTutorial: Tutorial = {
+        const updatedStudent: Student = {
             id: editId,
             name: editName,
             age: editAge,
             bio: editBio,
         };
 
-        dispatch(updateTutorial(updatedTutorial) as any);
+        dispatch(updateStudent(updatedStudent) as any);
 
         setEditId("");
         setEditName("");
@@ -48,8 +48,8 @@ const List = () => {
 
     return (
         <div className="container text-center m-5">
-            <h1>List</h1>
-            <table className="table">
+            <h1 className="text-start m-5">List Student</h1>
+            <table className="table table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -59,21 +59,21 @@ const List = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {tutorials.map((tutorial) => (
-                        <tr key={tutorial.id}>
-                            <td>{tutorial.name}</td>
-                            <td>{tutorial.age}</td>
-                            <td>{tutorial.bio}</td>
+                    {students.map((student) => (
+                        <tr key={student.id}>
+                            <td>{student.name}</td>
+                            <td>{student.age}</td>
+                            <td>{student.bio}</td>
                             <td>
                                 <button
                                     className="btn btn-danger"
-                                    onClick={() => handleDelete(tutorial.id)}
+                                    onClick={() => handleDelete(student.id)}
                                 >
                                     Delete
                                 </button>
                                 <button
                                     className="btn btn-primary ms-2"
-                                    onClick={() => handleEdit(tutorial)}
+                                    onClick={() => handleEdit(student)}
                                 >
                                     Edit
                                 </button>
@@ -85,7 +85,7 @@ const List = () => {
 
             {editId && (
                 <div>
-                    <h2>Edit Tutorial</h2>
+                    <h2>Edit Student</h2>
                     <input
                         type="text"
                         placeholder="Name"

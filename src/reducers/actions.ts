@@ -7,76 +7,76 @@ import {
     updateDoc,
 } from "firebase/firestore";
 import { database } from "../firebase";
-import { AppAction, Tutorial } from "./types";
+import { AppAction, Student } from "./types";
 import { Dispatch } from "redux";
 
-export const fetchTutorials = () => {
+export const fetchStudents = () => {
     return async (dispatch: Dispatch<AppAction>) => {
         try {
             const querySnapshot = await getDocs(
-                collection(database, "tutorials")
+                collection(database, "students")
             );
-            const tutorialsData = querySnapshot.docs.map((doc) => ({
+            const studentsData = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
-            })) as Tutorial[];
+            })) as Student[];
             dispatch({
-                type: "FETCH_TUTORIALS_SUCCESS",
-                payload: tutorialsData,
+                type: "FETCH_STUDENTS_SUCCESS",
+                payload: studentsData,
             });
         } catch (error: unknown) {
             dispatch({
-                type: "FETCH_TUTORIALS_FAILURE",
+                type: "FETCH_STUDENTS_FAILURE",
                 payload: (error as Error).message,
             });
         }
     };
 };
 
-export const addTutorial = (tutorial: Tutorial) => {
+export const addStudent = (student: Student) => {
     return async (dispatch: Dispatch<AppAction>) => {
         try {
-            const { id, ...tutorialData } = tutorial;
+            const { id, ...studentData } = student;
             const docRef = await addDoc(
-                collection(database, "tutorials"),
-                tutorialData
+                collection(database, "students"),
+                studentData
             );
             dispatch({
-                type: "ADD_TUTORIAL_SUCCESS",
-                payload: { id: docRef.id, ...tutorialData },
+                type: "ADD_STUDENT_SUCCESS",
+                payload: { id: docRef.id, ...studentData },
             });
         } catch (error: unknown) {
             dispatch({
-                type: "ADD_TUTORIAL_FAILURE",
+                type: "ADD_STUDENT_FAILURE",
                 payload: (error as Error).message,
             });
         }
     };
 };
 
-export const deleteTutorial = (id: string) => {
+export const deleteStudent = (id: string) => {
     return async (dispatch: Dispatch<AppAction>) => {
         try {
-            await deleteDoc(doc(database, "tutorials", id));
-            dispatch({ type: "DELETE_TUTORIAL_SUCCESS", payload: id });
+            await deleteDoc(doc(database, "students", id));
+            dispatch({ type: "DELETE_STUDENT_SUCCESS", payload: id });
         } catch (error: unknown) {
             dispatch({
-                type: "DELETE_TUTORIAL_FAILURE",
+                type: "DELETE_STUDENT_FAILURE",
                 payload: (error as Error).message,
             });
         }
     };
 };
 
-export const updateTutorial = (tutorial: Tutorial) => {
+export const updateStudent = (student: Student) => {
     return async (dispatch: Dispatch<AppAction>) => {
         try {
-            const { id, ...data } = tutorial;
-            await updateDoc(doc(database, "tutorials", id), data);
-            dispatch({ type: "UPDATE_TUTORIAL_SUCCESS", payload: tutorial });
+            const { id, ...data } = student;
+            await updateDoc(doc(database, "students", id), data);
+            dispatch({ type: "UPDATE_STUDENT_SUCCESS", payload: student });
         } catch (error: unknown) {
             dispatch({
-                type: "UPDATE_TUTORIAL_FAILURE",
+                type: "UPDATE_STUDENT_FAILURE",
                 payload: (error as Error).message,
             });
         }

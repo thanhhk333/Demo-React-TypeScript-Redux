@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTutorial } from "../reducers/actions";
+import { addStudent } from "../reducers/actions";
 import { AppState } from "../reducers/types";
-import { Tutorial } from "../reducers/types";
+import { Student } from "../reducers/types";
 
 const Form = () => {
     const addTutorialError = useSelector(
-        (state: AppState) => state.addTutorialError
+        (state: AppState) => state.addStudentError
     );
     const dispatch = useDispatch();
 
@@ -21,14 +21,14 @@ const Form = () => {
             return;
         }
 
-        const tutorial: Tutorial = {
-            id: "", // Cần chỉ định giá trị cho 'id' khi tạo một tutorial mới
+        const student: Student = {
+            id: "", // Cần chỉ định giá trị cho 'id' khi tạo một student mới
             name,
             age: Number(age),
             bio,
         };
 
-        dispatch(addTutorial(tutorial) as any);
+        dispatch(addStudent(student) as any);
 
         setName("");
         setAge("");
@@ -39,7 +39,7 @@ const Form = () => {
         <div className="container text-center">
             <h1 className="my-5">Add New</h1>
             {addTutorialError && (
-                <p>Error adding tutorial: {addTutorialError}</p>
+                <p>Error adding student: {addTutorialError}</p>
             )}
             <form onSubmit={handleSubmit}>
                 <div className="row row-cols-1 row-cols-md-4 g-4 text-center justify-content-center ">
